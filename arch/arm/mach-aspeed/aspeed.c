@@ -183,6 +183,8 @@ static void __init do_zaius_setup(void)
 	/* Read BOARD_REV[4:0] fuses from GPIOM[7:3] */
 	reg = readl(AST_IO(AST_BASE_GPIO | 0x78));
 	board_rev = (reg >> 3) & 0x1F;
+	/* SCU setup */
+        writel(0x003FA00C, AST_IO(AST_BASE_SCU | 0x90));
 
 	/* EVT1 hacks */
 	if (board_rev == 0) {
